@@ -9,6 +9,7 @@ import { SiteLogo } from "@/components/site-logo"
 const navLinks = [
   { href: "/", label: "Программа" },
   { href: "/news", label: "Новости" },
+  { href: "/contacts", label: "Контакты" },
 ]
 
 export function SiteHeader() {

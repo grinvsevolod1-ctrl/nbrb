@@ -4,6 +4,7 @@ import { SiteLogo } from "@/components/site-logo"
 const footerLinks = [
   { href: "/", label: "Программа" },
   { href: "/news", label: "Новости" },
+  { href: "/contacts", label: "Контакты" },
   { href: "/lottery", label: "Лотерея Green Card" },
 ]
 

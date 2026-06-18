@@ -12,11 +12,15 @@ import {
 } from "lucide-react"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
+import { StoriesSection } from "@/components/stories-section"
+import { MediaSection } from "@/components/media-section"
+import { FaqSection } from "@/components/faq-section"
+import { ContactForm } from "@/components/contact-form"
 
 const stats = [
-  { value: "320+", label: "дел сопровождается" },
+  { value: "1 месяц", label: "средний срок одобрения" },
+  { value: "3–4 дня", label: "примерный срок первого ответа" },
   { value: "94%", label: "одобрено по гуманитарной категории" },
-  { value: "12", label: "месяцев средний срок" },
 ]
 
 const steps = [
@@ -194,6 +198,12 @@ export default function Home() {
             </div>
           </section>
 
+          {/* Stories */}
+          <StoriesSection />
+
+          {/* Media / supporters */}
+          <MediaSection />
+
           {/* Eligibility */}
           <section className="mt-16">
             <h2 className="text-2xl font-semibold">Кто может участвовать</h2>
@@ -213,6 +223,29 @@ export default function Home() {
                 </li>
               ))}
             </ul>
+          </section>
+
+          {/* FAQ */}
+          <FaqSection />
+
+          {/* Quick contact */}
+          <section className="mt-16 rounded-3xl border border-border bg-card p-6 sm:p-10">
+            <div className="max-w-2xl">
+              <span className="text-xs font-medium uppercase tracking-wider text-red-500/80">
+                Быстрая связь
+              </span>
+              <h2 className="mt-2 text-balance text-2xl font-semibold sm:text-3xl">
+                Напишите нам напрямую
+              </h2>
+              <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">
+                Оставьте имя и удобный способ связи — ответим в течение 3–4 дней.
+                Сообщение придёт напрямую нашей команде. Все обращения
+                конфиденциальны.
+              </p>
+            </div>
+            <div className="mt-8">
+              <ContactForm />
+            </div>
           </section>
 
           {/* CTA */}
