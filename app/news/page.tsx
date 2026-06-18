@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { ArrowLeft, Clock, MapPin } from "lucide-react"
 import { SiteHeader } from "@/components/site-header"
+import { SiteFooter } from "@/components/site-footer"
 
 export const metadata: Metadata = {
   title: "Новости | Dissidentby",
@@ -73,6 +74,7 @@ export default function NewsPage() {
         </footer>
       </div>
       </main>
+      <SiteFooter />
     </>
   )
 }

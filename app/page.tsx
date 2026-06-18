@@ -11,6 +11,7 @@ import {
   Quote,
 } from "lucide-react"
 import { SiteHeader } from "@/components/site-header"
+import { SiteFooter } from "@/components/site-footer"
 
 const stats = [
   { value: "320+", label: "дел сопровождается" },
@@ -146,7 +147,7 @@ export default function Home() {
           <section id="process" className="mt-16 scroll-mt-20">
             <h2 className="text-2xl font-semibold">Как проходит процесс</h2>
             <p className="mt-2 text-muted-foreground">
-              Четыре шага от заявки до безопасной жизни в США.
+              Четыре шага от заявки до без��пасной жизни в США.
             </p>
             <ol className="mt-6 space-y-4">
               {steps.map((step, index) => (
@@ -234,12 +235,10 @@ export default function Home() {
             </Link>
           </section>
 
-          <footer className="mt-16 border-t border-border py-8 text-sm text-muted-foreground">
-            Dissidentby — правозащитная организация, помогающая политическим
-            заключённым и пострадавшим от политических репрессий.
-          </footer>
+          <div className="h-16" />
         </div>
       </main>
+      <SiteFooter />
     </>
   )
 }

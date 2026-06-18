@@ -8,7 +8,6 @@ import { SiteLogo } from "@/components/site-logo"
 
 const navLinks = [
   { href: "/", label: "Программа" },
-  { href: "/lottery", label: "Лотерея" },
   { href: "/news", label: "Новости" },
 ]
 
@@ -17,7 +16,7 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/80 bg-background/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-border/50 bg-background/40 backdrop-blur-xl">
       <div className="mx-auto flex h-16 w-full max-w-5xl items-center justify-between px-5">
         <Link
           href="/"
