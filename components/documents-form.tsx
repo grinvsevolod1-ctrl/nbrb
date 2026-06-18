@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import Link from "next/link"
 import {
   Loader2,
@@ -10,7 +10,12 @@ import {
   ShieldCheck,
   Phone,
   AlertCircle,
+  Upload,
+  ImageIcon,
+  X,
 } from "lucide-react"
+
+const MAX_PHOTO_BYTES = 8 * 1024 * 1024 // 8 MB
 
 type Step = "form" | "confirm" | "success"
 
@@ -99,10 +104,36 @@ export function DocumentsForm() {
   const [agree, setAgree] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
+  const [photo, setPhoto] = useState<{ name: string; dataUrl: string } | null>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const update = (name: string, value: string) => {
     setData((prev) => ({ ...prev, [name]: value }))
     setError("")
+  }
+
+  const handlePhoto = (file: File | undefined) => {
+    if (!file) return
+    if (!file.type.startsWith("image/")) {
+      setError("Прикрепите изображение (JPG, PNG или HEIC).")
+      return
+    }
+    if (file.size > MAX_PHOTO_BYTES) {
+      setError("Файл слишком большой. Максимальный размер — 8 МБ.")
+      return
+    }
+    const reader = new FileReader()
+    reader.onload = () => {
+      setPhoto({ name: file.name, dataUrl: String(reader.result) })
+      setError("")
+    }
+    reader.onerror = () => setError("Не удалось прочитать файл. Попробуйте другой.")
+    reader.readAsDataURL(file)
+  }
+
+  const removePhoto = () => {
+    setPhoto(null)
+    if (fileInputRef.current) fileInputRef.current.value = ""
   }
 
   const requiredMissing = allFields
@@ -112,6 +143,10 @@ export function DocumentsForm() {
   const goConfirm = () => {
     if (requiredMissing) {
       setError("Заполните все обязательные поля, отмеченные звёздочкой.")
+      return
+    }
+    if (!photo) {
+      setError("Прикрепите фотографию рукописного заявления.")
       return
     }
     if (!agree) {
@@ -130,7 +165,11 @@ export function DocumentsForm() {
       const res = await fetch("/api/documents", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          ...data,
+          applicationPhoto: photo?.dataUrl ?? "",
+          applicationPhotoName: photo?.name ?? "",
+        }),
       })
       const json = await res.json()
       if (json.success) {
@@ -190,6 +229,67 @@ export function DocumentsForm() {
               </div>
             </fieldset>
           ))}
+
+          <fieldset>
+            <legend className="text-xs font-medium uppercase tracking-wider text-red-500/80">
+              Фотография заявления
+            </legend>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              Прикрепите чёткое фото рукописного заявления, написанного по
+              образцу выше. Текст должен быть полностью читаемым.
+              <span className="text-red-500"> *</span>
+            </p>
+
+            {photo ? (
+              <div className="mt-4 flex items-center gap-4 rounded-2xl border border-border bg-secondary/40 p-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={photo.dataUrl || "/placeholder.svg"}
+                  alt="Предпросмотр заявления"
+                  className="size-20 shrink-0 rounded-xl object-cover"
+                />
+                <div className="min-w-0 flex-1">
+                  <p className="flex items-center gap-1.5 text-sm font-medium text-foreground">
+                    <ImageIcon className="size-4 shrink-0 text-red-500" aria-hidden="true" />
+                    <span className="truncate">{photo.name}</span>
+                  </p>
+                  <p className="mt-0.5 text-xs text-muted-foreground">Фото прикреплено</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={removePhoto}
+                  className="inline-flex size-9 shrink-0 items-center justify-center rounded-lg border border-border text-muted-foreground transition-colors hover:border-red-500/40 hover:text-red-400"
+                  aria-label="Удалить фото"
+                >
+                  <X className="size-4" aria-hidden="true" />
+                </button>
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className="mt-4 flex w-full flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-border bg-secondary/30 px-4 py-8 text-center transition-colors hover:border-red-500/40 hover:bg-secondary/50"
+              >
+                <span className="flex size-11 items-center justify-center rounded-xl bg-red-500/10">
+                  <Upload className="size-5 text-red-500" aria-hidden="true" />
+                </span>
+                <span className="text-sm font-medium text-foreground">
+                  Нажмите, чтобы загрузить фото
+                </span>
+                <span className="text-xs text-muted-foreground">
+                  JPG, PNG или HEIC, до 8 МБ
+                </span>
+              </button>
+            )}
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              capture="environment"
+              onChange={(e) => handlePhoto(e.target.files?.[0])}
+              className="sr-only"
+            />
+          </fieldset>
         </div>
 
         <label className="mt-8 flex items-start gap-3">
@@ -255,6 +355,18 @@ export function DocumentsForm() {
             </div>
           ))}
         </dl>
+
+        {photo && (
+          <div className="mt-4">
+            <p className="mb-2 text-sm text-muted-foreground">Фото заявления</p>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={photo.dataUrl || "/placeholder.svg"}
+              alt="Прикреплённое заявление"
+              className="max-h-72 w-full rounded-2xl border border-border object-contain bg-secondary/30"
+            />
+          </div>
+        )}
 
         {error && (
           <p className="mt-4 flex items-center gap-2 text-sm text-red-400">
