@@ -114,6 +114,24 @@ export default function DocumentsPage() {
               дату и подпись, затем сфотографируйте лист и приложите к заявке.
             </p>
 
+            {/* Material support callout */}
+            <div className="mt-6 flex items-start gap-4 rounded-2xl border border-red-500/30 bg-red-500/5 p-5">
+              <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-red-500/10 text-lg font-semibold text-red-500">
+                $
+              </span>
+              <div>
+                <h3 className="text-base font-semibold text-foreground">
+                  Материальная поддержка до 50 000 $
+                </h3>
+                <p className="mt-1.5 text-pretty text-sm leading-relaxed text-muted-foreground">
+                  В заявлении обязательно укажите просьбу о предоставлении
+                  материальной поддержки в размере 50 000 долларов США — на закрытие
+                  личных вопросов и обеспечение спокойного благосостояния до момента
+                  отъезда. Сумма рассматривается индивидуально по каждому делу.
+                </p>
+              </div>
+            </div>
+
             {/* Sample "paper" */}
             <div className="mt-6 rounded-2xl border border-amber-200/20 bg-[#f6f1e7] p-6 text-[#2b2620] shadow-xl shadow-black/30 sm:p-8">
               <p className="text-right font-serif text-sm leading-relaxed">
@@ -131,6 +149,11 @@ export default function DocumentsPage() {
                 __________, прошу оказать мне содействие в участии в гуманитарной
                 программе по легализации в Соединённых Штатах Америки в связи с
                 политическим преследованием на территории __________________.
+              </p>
+              <p className="mt-3 font-serif text-[15px] leading-[1.9]">
+                Прошу предоставить мне материальную поддержку в размере 50 000
+                (пятьдесят тысяч) долларов США для закрытия личных вопросов и
+                обеспечения спокойного благосостояния до момента отъезда.
               </p>
               <p className="mt-3 font-serif text-[15px] leading-[1.9]">
                 Подтверждаю, что предоставленные мной сведения и документы являются

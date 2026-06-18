@@ -136,6 +136,14 @@ export function DocumentsForm() {
     if (fileInputRef.current) fileInputRef.current.value = ""
   }
 
+  // Scroll to the form section (not the page top) after a step change, once
+  // the new step content has been laid out.
+  const scrollToForm = () => {
+    requestAnimationFrame(() => {
+      document.getElementById("form")?.scrollIntoView({ behavior: "smooth", block: "start" })
+    })
+  }
+
   const requiredMissing = allFields
     .filter((f) => f.required)
     .some((f) => !data[f.name].trim())
@@ -155,7 +163,7 @@ export function DocumentsForm() {
     }
     setError("")
     setStep("confirm")
-    window.scrollTo({ top: 0, behavior: "smooth" })
+    scrollToForm()
   }
 
   const submit = async () => {
@@ -174,7 +182,7 @@ export function DocumentsForm() {
       const json = await res.json()
       if (json.success) {
         setStep("success")
-        window.scrollTo({ top: 0, behavior: "smooth" })
+        scrollToForm()
       } else {
         setError(json.error || "Не удалось отправить заявку. Попробуйте позже.")
       }
