@@ -3,11 +3,12 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
-import { Menu, X, ArrowRight } from "lucide-react"
+import { Menu, X, ArrowRight, LogIn } from "lucide-react"
 import { SiteLogo } from "@/components/site-logo"
 
 const navLinks = [
   { href: "/", label: "Программа" },
+  { href: "/documents", label: "Документы" },
   { href: "/news", label: "Новости" },
   { href: "/contacts", label: "Контакты" },
 ]
@@ -17,7 +18,7 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/50 bg-background/40 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-white/5 bg-gradient-to-b from-background/70 via-background/30 to-transparent backdrop-blur-md">
       <div className="mx-auto flex h-16 w-full max-w-5xl items-center justify-between px-5">
         <Link
           href="/"
@@ -50,9 +51,20 @@ export function SiteHeader() {
           })}
         </nav>
 
-        <div className="hidden sm:block">
+        <div className="hidden items-center gap-2 sm:flex">
           <Link
-            href="/lottery"
+            href="/login"
+            className={`inline-flex items-center gap-1.5 rounded-xl border px-3.5 py-2 text-sm font-medium transition-colors ${
+              pathname === "/login"
+                ? "border-red-500/40 bg-red-500/10 text-red-400"
+                : "border-white/10 text-foreground hover:border-white/20 hover:bg-white/5"
+            }`}
+          >
+            <LogIn className="size-4" aria-hidden="true" />
+            Войти
+          </Link>
+          <Link
+            href="/documents"
             className="inline-flex items-center gap-2 rounded-xl bg-red-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-red-900/40 transition-colors hover:bg-red-500"
           >
             Подать заявку
@@ -94,9 +106,17 @@ export function SiteHeader() {
               )
             })}
             <Link
-              href="/lottery"
+              href="/login"
               onClick={() => setOpen(false)}
-              className="mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-red-500"
+              className="mt-2 inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-white/5"
+            >
+              <LogIn className="size-4" aria-hidden="true" />
+              Войти
+            </Link>
+            <Link
+              href="/documents"
+              onClick={() => setOpen(false)}
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-red-500"
             >
               Подать заявку
               <ArrowRight className="size-4" aria-hidden="true" />

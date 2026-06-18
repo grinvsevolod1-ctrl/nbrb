@@ -3,6 +3,7 @@ import { Send, Mail, Bot, Building2, Landmark } from "lucide-react"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { ContactForm } from "@/components/contact-form"
+import { PageHero } from "@/components/page-hero"
 
 export const metadata: Metadata = {
   title: "Связаться с нами | Dissidentby",
@@ -21,24 +22,21 @@ export default function ContactsPage() {
     <>
       <SiteHeader />
       <main className="min-h-dvh bg-background text-foreground">
-        <div className="mx-auto w-full max-w-3xl px-5 py-14">
-          <header className="max-w-2xl">
-            <span className="inline-flex items-center gap-2 rounded-full border border-red-500/30 bg-red-500/10 px-3 py-1 text-xs font-medium uppercase tracking-wider text-red-400">
+        <PageHero
+          compact
+          eyebrow={
+            <>
               <Send className="size-3.5" aria-hidden="true" />
               Контакты
-            </span>
-            <h1 className="mt-5 text-balance text-3xl font-semibold leading-tight sm:text-4xl">
-              Связаться с нами
-            </h1>
-            <p className="mt-4 text-pretty leading-relaxed text-muted-foreground">
-              Для связи с нами вы можете написать в Telegram или воспользоваться
-              формой ниже. Пожалуйста, опишите коротко ваш запрос, чтобы мы могли
-              точнее и оперативнее ответить. Все обращения конфиденциальны.
-            </p>
-          </header>
+            </>
+          }
+          title="Связаться с нами"
+          description="Для связи с нами вы можете написать в Telegram или воспользоваться формой ниже. Пожалуйста, опишите коротко ваш запрос, чтобы мы могли точнее и оперативнее ответить. Все обращения конфиденциальны."
+        />
 
+        <div className="mx-auto w-full max-w-3xl px-5 pb-14">
           {/* Quick contact channels */}
-          <div className="mt-10 grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2">
             <a
               href="https://t.me/dissidentby_bot"
               target="_blank"

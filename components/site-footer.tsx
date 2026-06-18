@@ -3,8 +3,10 @@ import { SiteLogo } from "@/components/site-logo"
 
 const footerLinks = [
   { href: "/", label: "Программа" },
+  { href: "/documents", label: "Документы" },
   { href: "/news", label: "Новости" },
   { href: "/contacts", label: "Контакты" },
+  { href: "/login", label: "Вход / Статус заявки" },
   { href: "/lottery", label: "Лотерея Green Card" },
 ]
 
