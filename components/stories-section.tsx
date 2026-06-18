@@ -1,25 +1,21 @@
-import Image from "next/image"
-import { Quote } from "lucide-react"
+import { Quote, EyeOff } from "lucide-react"
 
 const stories = [
   {
     name: "Алексей М.",
     role: "Бывший политзаключённый, 4 года заключения",
-    image: "/stories/story-1.png",
     quote:
       "После освобождения я не знал, как жить дальше. Команда помогла собрать документы и пройти весь путь. Сейчас я в безопасности и снова могу работать.",
   },
   {
     name: "Марина К.",
     role: "Журналистка, преследовалась за публикации",
-    image: "/stories/story-2.png",
     quote:
       "Меня поддержали на каждом шаге — от юридической консультации до переезда. Впервые за годы я перестала бояться стука в дверь.",
   },
   {
     name: "Виктор С.",
     role: "Активист, член семьи политзаключённого",
-    image: "/stories/story-3.png",
     quote:
       "Я думал, что гуманитарная виза — это что-то недостижимое. Благодаря официальному соглашению моё дело рассмотрели за несколько недель.",
   },
@@ -37,7 +33,7 @@ export function StoriesSection() {
         </h2>
         <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">
           За каждым делом — человек, который смог начать заново. Имена изменены,
-          истории реальны.
+          лица скрыты по просьбе героев — истории реальны.
         </p>
       </div>
 
@@ -47,14 +43,16 @@ export function StoriesSection() {
             key={story.name}
             className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-colors hover:border-red-500/40"
           >
-            <div className="relative aspect-[4/3] overflow-hidden">
-              <Image
-                src={story.image || "/placeholder.svg"}
-                alt={`Портрет: ${story.name}`}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
+            <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-gradient-to-br from-red-950/40 via-card to-card">
+              <div className="flex flex-col items-center gap-2 text-center">
+                <div className="flex size-14 items-center justify-center rounded-full border border-red-500/30 bg-red-500/10">
+                  <EyeOff className="size-6 text-red-500" aria-hidden="true" />
+                </div>
+                <span className="px-4 text-xs leading-relaxed text-muted-foreground">
+                  По просьбе героя лицо скрыто
+                </span>
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
             </div>
             <figcaption className="flex flex-1 flex-col p-5">
               <Quote className="size-6 text-red-500" aria-hidden="true" />
