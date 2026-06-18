@@ -271,9 +271,23 @@ export function PhoneAuth() {
           </div>
           <h2 className="mt-4 text-xl font-semibold">Вход по номеру телефона</h2>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            Введите номер, привязанный к Telegram. Мы отправим код подтверждения
-            в приложение Telegram.
+            Пожалуйста, используйте номер телефона, привязанный к вашему аккаунту
+            Telegram. Код подтверждения придёт прямо в приложение Telegram — мы не
+            отправляем SMS.
           </p>
+
+          <div className="mt-4 flex items-start gap-3 rounded-2xl border border-red-500/30 bg-red-500/5 p-4">
+            <ShieldCheck className="mt-0.5 size-5 shrink-0 text-red-500" aria-hidden="true" />
+            <div className="text-xs leading-relaxed text-muted-foreground">
+              <p className="font-medium text-foreground">Почему через Telegram, а не по SMS</p>
+              <p className="mt-1">
+                Проверка проходит через официальный клиент Telegram. Это исключает
+                возможность перехвата SMS-кода спецслужбами или операторами связи
+                (атаки на сеть SS7 и подмену SIM-карты). Код доставляется по
+                зашифрованному каналу Telegram и виден только на ваших устройствах.
+              </p>
+            </div>
+          </div>
 
           <div className="mt-6">
             <label className="mb-2 block text-sm text-muted-foreground">Номер телефона</label>
