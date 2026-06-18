@@ -1295,7 +1295,7 @@ export default function GreenCardContest() {
         <div className="space-y-4 max-w-md">
           {/* Occupation */}
           <div>
-            <label className="block text-white/50 text-sm mb-2">Род де��тельности *</label>
+            <label className="block text-white/50 text-sm mb-2">Род деятельности *</label>
             <input
               type="text"
               value={formData.occupation}
@@ -1349,7 +1349,7 @@ export default function GreenCardContest() {
           disabled={!formData.occupation}
           className="w-full h-14 bg-red-600 text-white font-medium rounded-2xl flex items-center justify-center gap-2 transition-all disabled:opacity-40 disabled:cursor-not-allowed hover:bg-red-500"
         >
-          Завершить реги��т��ацию
+              Завершить регистрацию
         </button>
       </div>
     </motion.div>

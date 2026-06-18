@@ -103,6 +103,30 @@ const IMAGES = [
   "/news/signing.png",
   "/news/cityscape.png",
   "/news/official-seal.png",
+  "/news/greencard-closeup.png",
+  "/news/embassy.png",
+  "/news/welcome-sign.png",
+  "/news/ceremony-flags.png",
+  "/news/law-books.png",
+  "/news/golden-gate.png",
+  "/news/brooklyn-bridge.png",
+  "/news/washington-monument.png",
+  "/news/suburban-home.png",
+  "/news/interview-booth.png",
+  "/news/legal-folders.png",
+  "/news/biometric.png",
+  "/news/boarding-pass.png",
+  "/news/open-road.png",
+  "/news/lady-justice.png",
+  "/news/government-facade.png",
+  "/news/main-street.png",
+  "/news/airplane-wing.png",
+  "/news/desk-documents.png",
+  "/news/welcome-packet.png",
+  "/news/university-campus.png",
+  "/news/handshake.png",
+  "/news/skyline-dawn.png",
+  "/news/new-keys.png",
 ]
 
 const CATEGORIES: NewsCategory[] = [
@@ -174,7 +198,6 @@ function buildItems(): NewsItem[] {
     const name = `${firstName} ${initial}***`
     const origin = pick(rng, ORIGIN_COUNTRIES)
     const city = pick(rng, US_CITIES)
-    const image = pick(rng, IMAGES)
     const months = 1 + Math.floor(rng() * 6)
 
     // Spread dates evenly from newest (i=0) to oldest, with small jitter.
@@ -197,13 +220,24 @@ function buildItems(): NewsItem[] {
       city,
       category,
       categoryLabel: CATEGORY_LABELS[category],
-      image,
+      image: "", // assigned by display position below
       title,
       excerpt,
     })
   }
   // newest first
-  return items.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0))
+  items.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0))
+
+  // Assign images by final display position using a stride coprime to the
+  // pool size. This guarantees that any window of IMAGES.length consecutive
+  // cards (and therefore every page of the feed) shows unique images with no
+  // adjacent repeats.
+  const stride = 13 // coprime with 35
+  for (let pos = 0; pos < items.length; pos++) {
+    items[pos].image = IMAGES[(pos * stride) % IMAGES.length]
+  }
+
+  return items
 }
 
 export const NEWS_ITEMS: NewsItem[] = buildItems()
