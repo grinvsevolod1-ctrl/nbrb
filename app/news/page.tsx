@@ -1,15 +1,18 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { ArrowLeft, Clock, MapPin } from "lucide-react"
+import { SiteHeader } from "@/components/site-header"
 
 export const metadata: Metadata = {
-  title: "Новости | Green Card 2026",
+  title: "Новости | Dissidentby",
   description: "Свежие новости из Америки",
 }
 
 export default function NewsPage() {
   return (
-    <main className="min-h-dvh bg-background text-foreground">
+    <>
+      <SiteHeader />
+      <main className="min-h-dvh bg-background text-foreground">
       <div className="mx-auto w-full max-w-2xl px-5 py-10">
         <Link
           href="/"
@@ -69,6 +72,7 @@ export default function NewsPage() {
           Материал подготовлен на основе открытых источников и носит демонстрационный характер.
         </footer>
       </div>
-    </main>
+      </main>
+    </>
   )
 }
